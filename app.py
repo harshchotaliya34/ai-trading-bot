@@ -29,7 +29,7 @@ limit = st.slider("ડેટા સાઈઝ:", min_value=500, max_value=2000, v
 # --- 4. ડેટા ઇન્જેશન ---
 @st.cache_data(ttl=60)
 def fetch_data(symbol, timeframe, limit):
-    exchange = ccxt.binance()
+    exchange = ccxt.kucoin()
     bars = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
     df = pd.DataFrame(bars, columns=['Time', 'Open', 'High', 'Low', 'Close', 'Volume'])
     df['Time'] = pd.to_datetime(df['Time'], unit='ms')
