@@ -22,14 +22,14 @@ st.set_page_config(page_title="AI Trading Agent", layout="wide")
 st.title("📊 AI Trading Agent - Fast Mode")
 
 # --- 3. યુઝર ઇનપુટ ---
-symbol = st.selectbox("ક્રિપ્ટો જોડી:", ["BTC/USDT", "ETH/USDT", "SOL/USDT"])
+symbol = st.selectbox("ક્રિપ્ટો જોડી:", ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "PAXG/USDT"])
 timeframe = st.selectbox("ટાઈમફ્રેમ:", ["5m", "15m", "1h", "1d"])
 limit = st.slider("ડેટા સાઈઝ:", min_value=500, max_value=2000, value=1000)
 
 # --- 4. ડેટા ઇન્જેશન ---
 @st.cache_data(ttl=60)
 def fetch_data(symbol, timeframe, limit):
-    exchange = ccxt.binance()
+    exchange = ccxt.binanceus()
     bars = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
     df = pd.DataFrame(bars, columns=['Time', 'Open', 'High', 'Low', 'Close', 'Volume'])
     df['Time'] = pd.to_datetime(df['Time'], unit='ms')
